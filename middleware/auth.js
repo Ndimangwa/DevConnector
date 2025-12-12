@@ -15,6 +15,7 @@ module.exports = function(req, res, next) {
         const decoded = jwt.verify(token, config.get('jwtSecret'));
         req.user = decoded.user; //Remember in payload we created user object
         //As usual we call next function
+        //console.log('Passed Here');
         next();
     } catch (err)   {
         console.error(err.message);
