@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -30,5 +32,6 @@
   "devDependencies": {
     "concurrently": "^9.2.1",
     "nodemon": "^3.1.11"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
