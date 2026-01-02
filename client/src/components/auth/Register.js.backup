@@ -1,13 +1,8 @@
 import React, {Fragment, useState} from 'react';
 import {Link} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import { addAlert, removeAlert } from '../../features/alert/alertSlice';
-import { alert_danger } from '../../constants/alert';
+import axios from 'axios';
 
 const Register = () => {
-  //Hooks should be at top
-  const dispatch = useDispatch();
-  //Hook Loaded
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,19 +17,33 @@ const Register = () => {
     [e.target.name]: e.target.value
   });
   //form submitting
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      //console.log('Passwords do not match');
-      //showAutoAlert("Passwords do not match", "danger", 5000);
-      const action = dispatch(addAlert("Passwords do not match", alert_danger, 5000));
-      const {id, timeout} = action.payload;
-      //remove Alert
-      setTimeout(() => {
-        dispatch(removeAlert(id));
-      }, timeout);
+      console.log('Passwords do not match');
     } else {
-      console.log(formData);
+      //Build new user
+      const newUser = {
+        name,
+        email, //email: email
+        password
+      };
+      try {
+        //Preparing for sending
+        const config = {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        };
+        //Preparing body
+        const body = JSON.stringify(newUser);
+        //now sending
+        const res = await axios.post('/api/users', body, config);
+        //Get results
+        console.log(res.data);
+      } catch (err) {
+        console.error(err.response.data);
+      }
     }
   }
 

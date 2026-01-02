@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Landing from './components/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import Alert from './components/layouts/Alert';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
             <Route exact path='/' element={<Landing/>}/>
         </Routes>
         <section className="container">
+          <Alert/>
           <Routes>
             <Route exact path='/register' element={<Register/>}/>
             <Route exact path='/login' element={<Login/>}/>
