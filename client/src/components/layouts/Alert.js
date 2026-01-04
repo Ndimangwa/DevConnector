@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useSelector } from "react-redux";
 
 const Alert = () => {
-  const alerts = useSelector(state => state.alert.alerts);
+  const alerts = useSelector(state => state.alert);
 
   return (
     <Fragment>
@@ -11,9 +11,8 @@ const Alert = () => {
         alerts.map(alert => (
           <div
             key={alert.id}
-            className={`alert alert-${alert.type}`}
+            className={`alert alert-${alert.alertType}`}
           >
-            { console.log(alert.type) }
             {alert.msg}
           </div>
         ))}

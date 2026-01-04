@@ -1,8 +1,9 @@
 import React, {Fragment, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import { addAlert, removeAlert } from '../../features/alert/alertSlice';
-import { alert_danger } from '../../constants/alert';
+import {setAlert} from '../../actions/alert';
+import { register } from '../../actions/auth';
+import {alert_danger} from '../../actions/styles';
 
 const Register = () => {
   //Hooks should be at top
@@ -27,14 +28,9 @@ const Register = () => {
     if (password !== password2) {
       //console.log('Passwords do not match');
       //showAutoAlert("Passwords do not match", "danger", 5000);
-      const action = dispatch(addAlert("Passwords do not match", alert_danger, 5000));
-      const {id, timeout} = action.payload;
-      //remove Alert
-      setTimeout(() => {
-        dispatch(removeAlert(id));
-      }, timeout);
+      dispatch(setAlert("Passwords do not match", alert_danger, 5000));
     } else {
-      console.log(formData);
+      dispatch(register({name, email, password}));
     }
   }
 
