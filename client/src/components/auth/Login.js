@@ -1,11 +1,19 @@
-import React, {Fragment, useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, {Fragment, useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Link, useNavigate} from 'react-router-dom';
+import {login} from '../../actions/auth';
 
 const Login = () => {
+  //Hooks should be at the top
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  //Hook Loaded
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  //from redux
+  const {isAuthenticated} = useSelector(state => state.auth);
   //Destructing
   const { email, password } = formData;
   //onChange
@@ -16,8 +24,14 @@ const Login = () => {
   //form submitting
   const onSubmit = e => {
     e.preventDefault();
-    console.log('Logged Successful');
+    dispatch(login({email, password}));
   }
+  //Now use Effect
+  useEffect(() => {
+    if (isAuthenticated)  {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <Fragment>

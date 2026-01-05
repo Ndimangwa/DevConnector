@@ -1,6 +1,7 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import {setAlert} from '../../actions/alert';
 import { register } from '../../actions/auth';
 import {alert_danger} from '../../actions/styles';
@@ -8,6 +9,7 @@ import {alert_danger} from '../../actions/styles';
 const Register = () => {
   //Hooks should be at top
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   //Hook Loaded
   const [formData, setFormData] = useState({
     name: '',
@@ -15,6 +17,8 @@ const Register = () => {
     password: '',
     password2: ''
   });
+  //get state
+  const {isAuthenticated} = useSelector(state => state.auth);
   //Destructing
   const { name, email, password, password2 } = formData;
   //onChange
@@ -33,7 +37,12 @@ const Register = () => {
       dispatch(register({name, email, password}));
     }
   }
-
+  //Now navigate
+  useEffect(() => {
+    if (isAuthenticated)  {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
   return (
     <Fragment>
       <h1 className="large text-primary">Sign Up</h1>
