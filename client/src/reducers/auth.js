@@ -4,7 +4,8 @@ import {
     USER_LOADED, 
     AUTH_ERROR,
     LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    LOGOUT
  } from "../actions/types";
 
 const my_token = 'token';
@@ -38,6 +39,7 @@ export default function authReducer(state=initialState, action)   {
         case REGISTER_FAIL:
         case AUTH_ERROR:
         case LOGIN_FAIL:
+        case LOGOUT:
             localStorage.removeItem(my_token);
             return {
                 ...state,

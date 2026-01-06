@@ -6,13 +6,15 @@ import Landing from './components/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alert from './components/layouts/Alert';
+import Dashboard from './components/dashboard/Dashboard';
+import ProtectedRoute from './components/routing/ProtectedRoute';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import {store} from './store';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
-}
+};
 
 const App = () => {
   useEffect(() => {
@@ -31,6 +33,9 @@ const App = () => {
           <Routes>
             <Route exact path='/register' element={<Register/>}/>
             <Route exact path='/login' element={<Login/>}/>
+            <Route element={<ProtectedRoute/>}>
+              <Route exact path='/dashboard' element={<Dashboard/>}/>
+            </Route>
           </Routes>
         </section>
       </Fragment>
