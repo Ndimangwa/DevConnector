@@ -6,7 +6,8 @@ import {
     AUTH_ERROR, 
     LOGIN_SUCCESS, 
     LOGIN_FAIL,
-    LOGOUT
+    LOGOUT,
+    PROFILE_CLEAR
 } from './types';
 import {setAlert} from '../actions/alert';
 import {alert_danger} from '../actions/styles';
@@ -95,6 +96,9 @@ export const register = ({name, email, password}) => async (dispatch) => {
 }
 //LOGOUT
 export const logout = () => (dispatch) => {
+    dispatch({
+        type: PROFILE_CLEAR
+    });
     dispatch({ 
         type: LOGOUT
      });

@@ -12,12 +12,18 @@ const Navbar = () => {
   //authLinks
   const authLinks = (
       <ul>
-       <li>
-          <i className='fas fa-sign-out-alt'>{' '}</i>
+        <li>
+          <Link to='/dashboard'>
+            <i className='fas fa-user'>{' '}</i>
+            <span className='hide-sm'>Dashboard</span>
+          </Link>
+        </li>
+        <li>
           <a href="#!" onClick={e => onLogout(e)}>
-              <spam class="hide-sm">Logout</spam>
+            <i className='fas fa-sign-out-alt'>{' '}</i>
+            <spam class="hide-sm">Logout</spam>
           </a>
-       </li>
+        </li>
       </ul>
   );
   //guestLinks
