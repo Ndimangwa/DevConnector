@@ -7,6 +7,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alert from './components/layouts/Alert';
 import Dashboard from './components/dashboard/Dashboard';
+import CreateProfile from './components/profile-forms/CreateProfile';
 import ProtectedRoute from './components/routing/ProtectedRoute';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
@@ -35,6 +36,7 @@ const App = () => {
             <Route exact path='/login' element={<Login/>}/>
             <Route element={<ProtectedRoute/>}>
               <Route exact path='/dashboard' element={<Dashboard/>}/>
+              <Route exact path='/create-profile' element={<CreateProfile/>}/>
             </Route>
           </Routes>
         </section>
