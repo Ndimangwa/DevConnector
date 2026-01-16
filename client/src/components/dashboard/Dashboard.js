@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layouts/Spinner';
 import {Link} from 'react-router-dom';
+import DashboardActions from './DashboardActions';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Dashboard = () => {
     </p>
     { profile !== null ? 
       (<Fragment>
-        User has profile
+        <DashboardActions/>
       </Fragment>) : 
       (<Fragment>
         <p>You have not setup a profile, please add some info.</p>

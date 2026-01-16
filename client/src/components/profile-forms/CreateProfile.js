@@ -1,25 +1,28 @@
-import {useState, Fragment} from 'react';
-import {useDispatch} from 'react-redux';
+import {useState, Fragment, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import { createProfile } from '../../actions/profile';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 
 const CreateProfile = () => {
     //Load Hooks
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [isEdit, setEdit] = useState(false);
+    const {profile} = useSelector((state) => state.profile);
+
     const [formData, setFormData] = useState({
-        company: '',
-        website: '',
-        location: '',
-        status: '',
-        skills: '',
-        githubusername: '',
-        bio: '',
-        twitter: '',
-        facebook: '',
-        linkedin: '',
-        youtube: '',
-        instagram: ''
+        company : '',
+        website : '',
+        location : '',
+        status : '',
+        skills : '',
+        githubusername : '',
+        bio : '',
+        twitter : '',
+        facebook : '',
+        linkedin : '',
+        youtube : '',
+        instagram : ''
     });
     //Now destructure
     const {
@@ -43,15 +46,45 @@ const CreateProfile = () => {
         ...formData,
         [e.target.name]: e.target.value
     });
+    //isEdit need to be updated when profile value changes
+    useEffect(() => {
+      if (profile !== null) {
+        //FormData
+        setFormData({
+          company : profile.company || '',
+          website : profile.website || '',
+          location : profile.location || '',
+          status : profile.status || '',
+          skills : profile.skills?.join(',') || '',
+          githubusername : profile.githubusername || '',
+          bio : profile.bio || '',
+          twitter : profile.social?.twitter || '',
+          facebook : profile.social?.facebook || '',
+          linkedin : profile.social?.linkedin || '',
+          youtube : profile.social?.youtube || '',
+          instagram : profile.social?.instagram || ''
+        });
+        //Mark as editable
+        setEdit(true);
+        //toggle socilInputs if any of available social input
+        toggleSocialInputs(
+          profile.social?.twitter || 
+          profile.social?.facebook || 
+          profile.social?.linkedin || 
+          profile.social?.youtube || 
+          profile.social?.instagram
+        );
+      }
+    }, [profile]);
     //submission
     const onSubmit = e => {
         e.preventDefault();
-        dispatch(createProfile(formData, navigate, false));
+        dispatch(createProfile(formData, navigate, isEdit));
     }
 
   return <Fragment>
     <h1 className="large text-primary">
-        Create Your Profile
+        { isEdit ? <>Update Your Profile</> : <>Create Your Profile</> }
       </h1>
       <p className="lead">
         <i className="fas fa-user"></i> Let's get some information to make your
@@ -150,7 +183,7 @@ const CreateProfile = () => {
             </div>
         </Fragment>}
         <input type="submit" className="btn btn-primary my-1" />
-        <a className="btn btn-light my-1" href="dashboard.html">Go Back</a>
+        <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
       </form>
   </Fragment>;
 }
