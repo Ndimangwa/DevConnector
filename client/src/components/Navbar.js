@@ -9,9 +9,12 @@ const Navbar = () => {
   const onLogout = (e) => {
     dispatch(logout());
   }
+  //profilesLink
+  const profilesLink = <li><Link to='/profiles'>Developers</Link></li>;
   //authLinks
   const authLinks = (
       <ul>
+        {profilesLink}
         <li>
           <Link to='/dashboard'>
             <i className='fas fa-user'>{' '}</i>
@@ -29,7 +32,7 @@ const Navbar = () => {
   //guestLinks
   const guestLinks = (
     <ul>
-        <li><a href="#!">Developers</a></li>
+        {profilesLink}
         <li><Link to="/register">Register</Link></li>
         <li><Link to="/login">Login</Link></li>
       </ul>
