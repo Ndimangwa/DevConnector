@@ -12,6 +12,7 @@ import AddEducation from './components/profile-forms/AddEducation';
 import AddExperience from './components/profile-forms/AddExperience';
 import ProtectedRoute from './components/routing/ProtectedRoute';
 import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import {store} from './store';
@@ -38,6 +39,7 @@ const App = () => {
             <Route exact path='/register' element={<Register/>}/>
             <Route exact path='/login' element={<Login/>}/>
             <Route exact path='/profiles' element={<Profiles/>}/>
+            <Route exact path='/profile/:id' element={<Profile/>}/>
             <Route element={<ProtectedRoute/>}>
               <Route exact path='/dashboard' element={<Dashboard/>}/>
               <Route exact path='/create-profile' element={<CreateProfile/>}/>

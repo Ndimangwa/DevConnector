@@ -2,7 +2,13 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 const ProfileItem = ({key, profile}) => {
-    const {_id, name, avatar, skills, status, company, location} = profile; //contains name and avatar due to populate
+    const {
+      user: { _id, name, avatar },
+      skills, 
+      status, 
+      company, 
+      location
+    } = profile; //contains name and avatar due to populate
   return (
     <div className='profile bg-light'>
       <img className='round-img' src={avatar} alt=''/>
