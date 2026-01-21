@@ -42,6 +42,10 @@ export const login = ({email, password}) => async (dispatch) => {
     const body = JSON.stringify({email, password});
     //request
     try {
+        //Better clear previous profiles
+        dispatch({
+            type: PROFILE_CLEAR
+        });
        const res = await axios.post('/api/auth', body, config);
        //if you are here then everything was complete
        dispatch({
@@ -74,6 +78,10 @@ export const register = ({name, email, password}) => async (dispatch) => {
     const body = JSON.stringify({name, email, password});
     //request
     try {
+        //Better clear previous profiles
+       dispatch({
+            type: PROFILE_CLEAR
+       });
        const res = await axios.post('/api/users', body, config);
        //if you are here then everything was complete
        dispatch({
@@ -95,11 +103,13 @@ export const register = ({name, email, password}) => async (dispatch) => {
     }
 }
 //LOGOUT
-export const logout = () => (dispatch) => {
+export const logout = (navigate) => (dispatch) => {
     dispatch({
         type: PROFILE_CLEAR
     });
     dispatch({ 
         type: LOGOUT
      });
+     //go to home page
+     navigate('/');
 }

@@ -1,13 +1,14 @@
 import { Fragment } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../actions/auth';
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const {isAuthenticated, loading} = useSelector(state => state.auth);
+  const navigate = useNavigate();
   const onLogout = (e) => {
-    dispatch(logout());
+    dispatch(logout(navigate));
   }
   //profilesLink
   const profilesLink = <li><Link to='/profiles'>Developers</Link></li>;
@@ -15,6 +16,9 @@ const Navbar = () => {
   const authLinks = (
       <ul>
         {profilesLink}
+        <li>
+          <Link to='/posts'>Posts</Link>
+        </li>
         <li>
           <Link to='/dashboard'>
             <i className='fas fa-user'>{' '}</i>

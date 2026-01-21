@@ -35,13 +35,11 @@ export default function profileReducer(state=initialState, action)    {
             return {
                 ...state,
                 error: payload,
-                loading: false
+                loading: false,
+                profile: null
             };
         case PROFILE_CLEAR:
-            return {
-                ...initialState,
-                loading: false
-            }
+            return initialState;
         case GET_REPOS:
             return {
                 ...state,
