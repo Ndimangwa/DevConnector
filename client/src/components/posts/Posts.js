@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { getPosts } from '../../actions/post';
 import Spinner from '../layouts/Spinner';
 import PostItem from './PostItem';
+import PostForm from './PostForm';
 
 const Posts = () => {
     const {posts, loading} = useSelector((state) => state.post);
@@ -17,6 +18,8 @@ const Posts = () => {
         <i className='fas fa-user'></i>{' '}
         Welcome to the Community
     </p>
+    {/* New Post */}
+    <PostForm/>
     {/* Now Post List */}
     <div className='posts'>
         { posts.map(post => (

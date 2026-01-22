@@ -17,6 +17,7 @@ import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import {store} from './store';
 import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -48,6 +49,7 @@ const App = () => {
               <Route exact path='/add-experience' element={<AddExperience/>}/>
               <Route exact path='/add-education' element={<AddEducation/>}/>
               <Route exact path='/posts' element={<Posts/>}/>
+              <Route exact path='/posts/:id' element={<Post/>}/>
             </Route>
           </Routes>
         </section>
