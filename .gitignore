@@ -1,4 +1,4 @@
 node_modules/
-config/
+config/default.json
 client/node_modules/
 theme-resource/

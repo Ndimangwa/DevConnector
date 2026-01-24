@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://db_dev_connector:KFX8QHxDW04JXQv1@devconnector.nybqz6l.mongodb.net/?appName=DevConnector",
+    "jwtSecret": "Kenge wa miguu hamsini na nane!!!!!",
+    "githubclientId": "Ov23limvy1XAlhOfYr4b",
+    "githubsecret": "78c80e0e7f49f567ce863ce7b78879771706a096"
+}

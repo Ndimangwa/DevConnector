@@ -18,6 +18,7 @@ import setAuthToken from './utils/setAuthToken';
 import {store} from './store';
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
+import NotFound from './components/routing/NotFound';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -51,6 +52,7 @@ const App = () => {
               <Route exact path='/posts' element={<Posts/>}/>
               <Route exact path='/posts/:id' element={<Post/>}/>
             </Route>
+            <Route path="*" element={<NotFound/>}/>>
           </Routes>
         </section>
       </Fragment>
